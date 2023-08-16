@@ -33,7 +33,31 @@ jobs:
     name: 规划编译策略&准备编译环境
     runs-on: ubuntu-22.04
     steps: 
-     - run: |
-     
+     - name: 签出储存库
+       uses: actions/checkout@v3
+
+     - name: 记录开始时间
+       id: start_time
+       run: |
+        # 设置时区为上海
+        sudo timedatectl set-timezone Asia/Shanghai
+        # 记录开始时间
+        starttime=$(date +"%Y-%m-%d %H:%M")
+        # 输出时间到UI和ENV
+        echo "::set-output name=starttime::$starttime"
+        echo "starttime=$starttime" >> "$GITHUB_ENV"
+
+     - name: 确定编译流程
+       id: build_stragety
+       run: |
+        # 读取config文件
+        config_path=$GITHUB_WORKSPACE/GlobalConfig/GlobalConfig.config
+        if [ -e "$file_path" ]; then
+            echo "File exists."
+        else
+            echo "File does not exist."
+        fi
+        # 读取target
+        target=$(grep "^target=" $GITHUB_WORKSPACE/GlobalConfig/GlobalConfig.config|sed "s/.*=//g")
+        echo "target=$target" >> "$GITHUB_ENV"
         
-    
