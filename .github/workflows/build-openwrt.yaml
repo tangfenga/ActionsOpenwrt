@@ -1,6 +1,10 @@
-
+#
 # This is free software, licensed under the MIT License.
 # See /LICENSE for more information.
 #
 # https://github.com/tangfenga/ActionsOpenwrt.git
 # Description: Build OpenWrt using GitHub Actions
+#
+
+name: build-openwrt
+run-name: 
