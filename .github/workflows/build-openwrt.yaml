@@ -65,7 +65,7 @@ jobs:
         target=$(grep "^target=" $GITHUB_WORKSPACE/GlobalConfig/GlobalConfig.config|sed "s/.*=//g")
         echo "target=$target" >> "$GITHUB_ENV"
         # 根据target创建矩阵
-        matrix_stragety="[$target]"
+        matrix="[$target]"
         echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
         
   
