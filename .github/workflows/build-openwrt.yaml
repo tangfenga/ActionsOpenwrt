@@ -65,9 +65,11 @@ jobs:
         # 读取target
         target=$(grep "^target=" $GITHUB_WORKSPACE/GlobalConfig/GlobalConfig.config|sed "s/.*=//g")
         echo "target=$target" >> "$GITHUB_ENV"
-        # 根据target创建矩阵
-        matrix="[$target]"
-        echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+        target_json="[\"$target\"]"
+        echo "matrix=$target_json" >> "$GITHUB_OUTPUT"
+        # # 根据target创建矩阵
+        # matrix="[$target]"
+        # echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
         
   
  build-preparation:
