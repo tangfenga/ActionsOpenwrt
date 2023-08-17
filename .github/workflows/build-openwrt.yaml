@@ -33,7 +33,7 @@ on:
 jobs:
  prepare:
     name: 规划编译策略&准备编译环境
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     outputs:
         matrix: ${{ steps.build_stragety.outputs.matrix }}
     steps: 
@@ -70,7 +70,7 @@ jobs:
         
   
  build-preparation:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     needs: prepare
     strategy:
         matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
