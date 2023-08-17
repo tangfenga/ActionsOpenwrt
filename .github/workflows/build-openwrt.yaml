@@ -27,7 +27,7 @@ on:
 # 每12小时运行一次
     schedule:
         - cron: '0 */12 * * *'
-    workflow_call:
+    workflow_dispatch:
 
 
 jobs:
