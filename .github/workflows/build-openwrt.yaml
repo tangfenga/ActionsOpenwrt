@@ -35,6 +35,7 @@ jobs:
     name: 规划编译策略&准备编译环境
     runs-on: ubuntu-latest
     outputs:
+        starttime: ${{ steps.start_time.outputs.starttime }}
         matrix: ${{ steps.build_stragety.outputs.matrix }}
     steps: 
      - name: 签出储存库
@@ -48,7 +49,7 @@ jobs:
         # 记录开始时间
         starttime=$(date +"%Y-%m-%d %H:%M")
         # 输出时间到UI和ENV
-        echo "::set-output name=starttime::$starttime"
+        echo "starttime=$starttime" >> "$GITHUB_OUTPUT"
         echo "starttime=$starttime" >> "$GITHUB_ENV"
 
      - name: 确定编译流程
@@ -73,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     strategy:
-        matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+        matrix: ${{ needs.prepare.outputs.matrix }}
     name: Build-Prepare-${{ matrix.config }}
     steps:
       - name: 签出储存库
