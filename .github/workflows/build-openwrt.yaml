@@ -65,18 +65,17 @@ jobs:
         # 读取target
         target=$(grep "^target=" $GITHUB_WORKSPACE/GlobalConfig/GlobalConfig.config|sed "s/.*=//g")
         echo "target=$target" >> "$GITHUB_ENV"
-        target_json="[\"$target\"]"
-        echo "matrix=$target_json" >> "$GITHUB_OUTPUT"
-        # # 根据target创建矩阵
-        # matrix="[$target]"
-        # echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+        # 根据target创建矩阵
+        matrix="[$target]"
+        echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
         
   
  build-preparation:
     runs-on: ubuntu-latest
     needs: prepare
     strategy:
-        matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+        matrix: 
+            config: ${{ needs.prepare.outputs.matrix }}
     name: Build-Prepare-${{ matrix.config }}
     steps:
       - name: 签出储存库
